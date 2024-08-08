@@ -9,9 +9,10 @@ if(!isLoggedIn || !user){
   return Astro.redirect("/login");
 }
 
-const { email, emailVerificado, nombre , avatar } = user;
+const { email, nombre , avatar } = user;
 const firebaseuser = firebase.auth.currentUser;
 await firebaseuser?.reload();
+const {emailVerified} = firebaseuser!;
 
 // const firebaseuser = firebase.auth.currentUser;
 
@@ -49,7 +50,7 @@ await firebaseuser?.reload();
       <div class="text-center mt-2 font-light text-sm">{email}</div>
       <div class="text-center font-normal text-lg">
 		{
-			emailVerificado ? 'Email verificado' : 'Email no verificado'
+			emailVerified ? 'Email verificado' : 'Email no verificado'
 		}
 	  </div>
       <div class="px-6 text-center mt-2 font-light text-sm">
