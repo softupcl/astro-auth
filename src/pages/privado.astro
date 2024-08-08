@@ -5,11 +5,13 @@ import MainLayout from "../layouts/MainLayout.astro";
 
 
 const {user,isLoggedIn} = Astro.locals;
-if(!user || !user){
+if(!isLoggedIn || !user){
   return Astro.redirect("/login");
 }
 
 const { email, emailVerificado, nombre , avatar } = user;
+const firebaseuser = firebase.auth.currentUser;
+await firebaseuser?.reload();
 
 // const firebaseuser = firebase.auth.currentUser;
 
